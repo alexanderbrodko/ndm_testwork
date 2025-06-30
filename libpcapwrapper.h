@@ -302,8 +302,8 @@ private:
             return false;
         }
 
-        if (pcap_activate(handle_) != 0) {
-            onerror_("Error activating pcap");
+        if (pcap_activate(handle_) < 0) { // skip warnings
+            onerror_(std::string("Error activating pcap") + pcap_geterr(handle_));
             return false;
         }
 
